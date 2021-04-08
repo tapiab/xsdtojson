@@ -5,8 +5,11 @@ except ImportError: # for pip <= 9.0.3
     from pip.req import parse_requirements
 from setuptools import setup
 
-install_requirements = parse_requirements('./requirements.txt', session=False)
-requirements = [str(ir.req) for ir in install_requirements]
+install_requirements = list(parse_requirements('./requirements.txt', session=False))
+try:
+	requirements = [str(ir.req) for ir in install_requirements]
+except:
+	requirements = [str(ir.requirement) for ir in install_requirements]
 
 setup(
     name='xsdtojson',
